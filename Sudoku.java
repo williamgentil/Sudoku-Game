@@ -36,7 +36,7 @@ public class Sudoku {
 
     public static void main(String[] args) {
         Sudoku sudoku = new Sudoku();
-        // Remplissez les valeurs de la grille ici
-        // par exemple: sudoku.setCell(0, 0, 5);
+       
+
     }
 }
