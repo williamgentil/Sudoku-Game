@@ -1,42 +1,41 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import javax.swing.border.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
-public class SudokuPanel extends JPanel implements KeyListener {
-    private Sudoku sudoku;
-    private JButton loadButton;
+public class SudokuPanel extends JPanel implements KeyListener, MouseListener {
+    private Grille grille;
+    private SudokuBoard sudokuBoard;
+    private LoadFromFilePanel loadFromFilePanel;
 
-    public SudokuPanel(Sudoku sudoku) {
-        this.sudoku = sudoku;
-        setMinimumSize(new Dimension(200, 200));
-        setPreferredSize(new Dimension(400, 400));
+    public SudokuPanel(SudokuBoard sudokuBoard) {
+        this.sudokuBoard = sudokuBoard;
+        setLayout(new GridLayout(9, 9));
 
-       
+        grille = new Grille();
+        add(grille);
 
-        // Ajout du panneau lui-même en tant qu'écouteur de clavier
+        loadFromFilePanel = new LoadFromFilePanel(this);
+        add(loadFromFilePanel);
+
+        addMouseListener(this);
         addKeyListener(this);
-        // Rendre le panneau focusable pour recevoir les entrées au clavier
         setFocusable(true);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-
-        // Gérer les touches de direction pour la navigation
         if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT) {
-            // Implémenter la logique de navigation ici
+            // Gérer la navigation avec les touches directionnelles
         } else {
-            // Gérer les autres pressions de touche
             char keyChar = e.getKeyChar();
             if (Character.isDigit(keyChar)) {
                 int number = Character.getNumericValue(keyChar);
-                // Implémenter la logique pour définir le numéro dans la grille Sudoku
+                // Placer le numéro dans la grille Sudoku
             }
         }
     }
@@ -51,31 +50,72 @@ public class SudokuPanel extends JPanel implements KeyListener {
         // Ne rien faire
     }
 
-    // Gérer les clics de souris sur le panneau
-    public void handleMouseClick(int x, int y) {
-        // Implémenter la logique pour déterminer la cellule sélectionnée en fonction des coordonnées du clic de souris
+    public void createEmptyGrid() {
+        // Réinitialiser la grille en supprimant tous les chiffres qu'elle contient
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                sudokuBoard.setNumber(i, j,0 ); 
+            }
+        }
+        // Mettre à jour l'interface utilisateur pour refléter la grille vide
+        repaint();
+    }
+    
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        // Déterminer la cellule sélectionnée en fonction des coordonnées du clic de souris
+    } 
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // Ne rien faire
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        // Implémenter la logique de dessin pour la grille Sudoku et les nombres
+    public void mouseReleased(MouseEvent e) {
+        // Ne rien faire
     }
 
-    private void chargerGrilleDepuisFichier(String chemin) {
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // Ne rien faire
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // Ne rien faire
+    }
+
+    // Méthode pour gérer le clic de souris sur la grille
+    public void handleMouseClick(int x, int y) {
+        // Implémentez la logique pour déterminer la cellule sélectionnée en fonction des coordonnées du clic de souris
+    }
+
+
+    // Méthode pour charger une grille depuis un fichier
+    public void loadFromFile(File file) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(chemin));
-            String line;
+            Scanner scanner = new Scanner(file);
             int row = 0;
-            while ((line = reader.readLine()) != null && row < 9) {
-                String[] values = line.split("");
-                for (int col = 0; col < 9; col++) {
-                    sudoku.setCell(row, col, Integer.parseInt(values[col]));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                for (int col = 0; col < line.length(); col++) {
+                    char c = line.charAt(col);
+                    if (c != '0') {
+                        int number = Character.getNumericValue(c);
+                        sudokuBoard.setNumber(row, col, number);
+                    }
                 }
                 row++;
             }
-            reader.close();
-        } catch (IOException e) {
+            scanner.close();
+            // Mettez à jour l'interface utilisateur pour refléter la nouvelle grille chargée
+            repaint();  
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
