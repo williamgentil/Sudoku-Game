@@ -1,26 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.border.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class SudokuPanel extends JPanel implements KeyListener, MouseListener {
     private Grille grille;
     private SudokuBoard sudokuBoard;
-    private LoadFromFilePanel loadFromFilePanel;
+    private ChargerUneGrille chargerUneGrille;
+    
 
     public SudokuPanel(SudokuBoard sudokuBoard) {
         this.sudokuBoard = sudokuBoard;
         setLayout(new GridLayout(9, 9));
 
-        grille = new Grille();
+        grille = new Grille(sudokuBoard);
         add(grille);
 
-        loadFromFilePanel = new LoadFromFilePanel(this);
-        add(loadFromFilePanel);
-
+        chargerUneGrille = new ChargerUneGrille();
         addMouseListener(this);
         addKeyListener(this);
         setFocusable(true);
@@ -49,19 +45,6 @@ public class SudokuPanel extends JPanel implements KeyListener, MouseListener {
     public void keyTyped(KeyEvent e) {
         // Ne rien faire
     }
-
-    public void createEmptyGrid() {
-        // Réinitialiser la grille en supprimant tous les chiffres qu'elle contient
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                sudokuBoard.setNumber(i, j,0 ); 
-            }
-        }
-        // Mettre à jour l'interface utilisateur pour refléter la grille vide
-        repaint();
-    }
-    
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -98,25 +81,11 @@ public class SudokuPanel extends JPanel implements KeyListener, MouseListener {
 
     // Méthode pour charger une grille depuis un fichier
     public void loadFromFile(File file) {
-        try {
-            Scanner scanner = new Scanner(file);
-            int row = 0;
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                for (int col = 0; col < line.length(); col++) {
-                    char c = line.charAt(col);
-                    if (c != '0') {
-                        int number = Character.getNumericValue(c);
-                        sudokuBoard.setNumber(row, col, number);
-                    }
-                }
-                row++;
-            }
-            scanner.close();
-            // Mettez à jour l'interface utilisateur pour refléter la nouvelle grille chargée
-            repaint();  
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        ChargerUneGrille.chargerUneGrille(grille);
+
+    }
+    // Méthode pour sauvegarder une grille depuis un fichier
+    public void saveToFile(File file) {
+        SaveGridPanel.saveGridPanel(grille);
     }
 }
