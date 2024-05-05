@@ -1,21 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class SudokuGame {
+public class SudokuGame2 {
 
     // Variables d'instance
 
     private JFrame frame;
-    private SudokuPanel sudokuPanel2;
+    private SudokuPanel2 sudokuPanel2;
     private SudokuTimer sudokuTimer;
 
-    public SudokuGame() {
+    public SudokuGame2() {
 
         // Constructeur
 
         frame = new JFrame("Sudoku Game");
-        SudokuBoard board = new SudokuBoard(9); // Création d'un nouveau tableau Sudoku
-        sudokuPanel2 = new SudokuPanel(board); // Création du panneau Sudoku avec le tableau Sudoku
+        SudokuBoard2 board = new SudokuBoard2(9); // Création d'un nouveau tableau Sudoku
+        sudokuPanel2 = new SudokuPanel2(board); // Création du panneau Sudoku avec le tableau Sudoku
         sudokuTimer = new SudokuTimer(); // Création d'un nouveau minuteur
     }
 
@@ -31,9 +31,9 @@ public class SudokuGame {
 
         // Création des boutons
         JButton checkButton = new JButton("Vérifier");
+        JButton solveButton = new JButton("Résoudre");
         JButton generateButton = new JButton("Générer Grille");
-        JButton loadGridButton = new JButton("Charger Grille"); // Nouveau bouton
-        JButton saveButton = new JButton("Sauvegarder Grille");
+        JButton loadGrid2Button = new JButton("Charger Grille"); // Nouveau bouton
 
         // Ajout des écouteurs d'événements aux boutons
 
@@ -49,30 +49,36 @@ public class SudokuGame {
             }
         });
 
+        // Bouton de résolution
+        solveButton.addActionListener(e -> {
+            boolean solved = sudokuPanel2.getBoard().solve();
+            if (solved) {
+                updateBoardView();
+                JOptionPane.showMessageDialog(frame, "Sudoku résolu!", "Résolutions", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Impossible de résoudre le Sudoku", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
         // Bouton de génération d'une nouvelle grille
         generateButton.addActionListener(e -> {
-            SudokuBoard board = new SudokuBoard(9);
+            SudokuBoard2 board = new SudokuBoard2(9);
             board.generateBoard();
             sudokuPanel2.setBoard(board);
             sudokuPanel2.repaint();
         });
 
         // Bouton de chargement d'une grille
-        loadGridButton.addActionListener(e -> {
-            LoadGrid.LoadGrid(sudokuPanel2);
-        });
-
-        // Bouton de sauvegarde de la grille
-        saveButton.addActionListener(e -> {
-            SaveGrid.saveGrid(sudokuPanel2);
+        loadGrid2Button.addActionListener(e -> {
+            LoadGrid2.LoadGrid2(sudokuPanel2);
         });
 
         // Création d'un panneau pour les boutons
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(checkButton);
+        buttonPanel.add(solveButton);
         buttonPanel.add(generateButton);
-        buttonPanel.add(loadGridButton);
-        buttonPanel.add(saveButton);
+        buttonPanel.add(loadGrid2Button);
 
         // Ajout du panneau Sudoku et du panneau de boutons à la fenêtre principale
         frame.add(sudokuPanel2, BorderLayout.CENTER);
