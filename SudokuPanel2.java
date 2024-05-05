@@ -22,16 +22,9 @@ public class SudokuPanel2 extends JPanel implements KeyListener {
     setMinimumSize(new Dimension(200, 200));
     setPreferredSize(new Dimension(400,400));
 
-    // Ajoute un mouse listener pour gérer les clicks de souris sur la fenêtre
-    addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        handleMouseClick(e.getX(), e.getY());
-      }
-    });
-    // Ajoute le paneau lui-même en tant que key listener
+   
+    addMouseListener(new SudokuPanel2MouseListener(this));
     addKeyListener(this);
-    // Rend le paneau focusable pour recevoir de l'input du clavier
     setFocusable(true);
   }
 

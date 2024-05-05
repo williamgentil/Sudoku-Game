@@ -34,6 +34,14 @@ SudokuTimer.class : SudokuTimer.java TimerActionListener.class
 TimerActionListener.class : TimerActionListener.java 
 	${JC} ${JCFLAGS} TimerActionListener.java
 
+SudokuPanelMouseListener.class : SudokuPanelMouseListener.java SudokuPanel.class
+	${JC} ${JCFLAGS} SudokuPanelMouseListener.java
+
+SudokuPanel2MouseListener.class : SudokuPanel2MouseListener.java SudokuPanel2.class
+	${JC} ${JCFLAGS} SudokuPanel2MouseListener.java
+
+
+Main.class : SudokuPanelMouseListener.class
 
 second : Main2.class
 
@@ -57,6 +65,8 @@ SudokuTimer.class : SudokuTimer.java TimerActionListener.class
 
 TimerActionListener.class : TimerActionListener.java 
 	${JC} ${JCFLAGS} TimerActionListener.java
+
+Main2.class : SudokuPanel2MouseListener.class
 ### REGLES OPTIONNELLES ###
 
 run1 : Main.class

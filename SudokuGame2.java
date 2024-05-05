@@ -50,15 +50,44 @@ public class SudokuGame2 {
         });
 
         // Bouton de résolution
-        solveButton.addActionListener(e -> {
-            boolean solved = sudokuPanel2.getBoard().solve();
-            if (solved) {
-                updateBoardView();
-                JOptionPane.showMessageDialog(frame, "Sudoku résolu!", "Résolutions", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Impossible de résoudre le Sudoku", "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        
+    // Bouton de résolution
+
+solveButton.addActionListener(e -> {
+    long startTime = System.nanoTime(); // Enregistrement du temps de début de résolution
+
+    // Attendre un délai aléatoire entre 5 et 10 secondes
+    int delay = (int) (Math.random() * 6 + 5); // entre 5 et 10 inclus
+    try {
+        Thread.sleep(delay * 1000); // Convertir le délai en millisecondes
+    } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
+    }
+
+    // Exécuter la résolution
+    boolean solved = sudokuPanel2.getBoard().solve();
+
+    long endTime = System.nanoTime(); // Enregistrement du temps de fin de résolution
+
+    // Calculer le temps écoulé en secondes
+    long elapsedTime = (endTime - startTime) / 1_000_000_000;
+
+    // Afficher le message de résolution avec le temps écoulé
+    if (solved) {
+        String message = String.format("Sudoku résolu en %d secondes", elapsedTime);
+        JOptionPane.showMessageDialog(frame, message, "Résolutions", JOptionPane.INFORMATION_MESSAGE);
+        // Mettre à jour l'affichage après la résolution
+        updateBoardView();
+    } else {
+        JOptionPane.showMessageDialog(frame, "Impossible de résoudre le Sudoku", "Erreur", JOptionPane.ERROR_MESSAGE);
+    }
+});
+
+
+
+
+
+
 
         // Bouton de génération d'une nouvelle grille
         generateButton.addActionListener(e -> {
