@@ -5,6 +5,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * La classe <code>SudokuPanel</code> est un panneau qui affiche le plateau du jeu Sudoku et gère les interactions avec l'utilisateur.
+ * @version 1.1
+ * @author ETOILE Fabio
+ * Il permet de sélectionner une case, d'entrer des chiffres avec le clavier et d'afficher visuellement le Sudoku.
+ */
 public class SudokuPanel extends JPanel implements KeyListener {
   // Variables d'instance
   private SudokuBoard board;
@@ -12,7 +18,11 @@ public class SudokuPanel extends JPanel implements KeyListener {
   private int selectedRow;
   private int selectedCol;
 
-  // Constructeur
+  /**
+   * Constructeur de la classe <code>SudokuPanel</code>.
+   * Initialise le panneau Sudoku avec un plateau de jeu donné et ajoute des écouteurs d'événements pour les clics souris et les entrées clavier.
+   * @param board Le plateau de jeu Sudoku associé à ce panneau.
+   */
   public SudokuPanel(SudokuBoard board) {
     this.board = board;
     selectedNumber = 0; 
@@ -22,7 +32,7 @@ public class SudokuPanel extends JPanel implements KeyListener {
     setPreferredSize(new Dimension(400,400));
 
     SudokuPanelMouseListener mouseListener = new SudokuPanelMouseListener(this);
-        addMouseListener(mouseListener);
+    addMouseListener(mouseListener);
     addKeyListener(this);
     // Rend le paneau focusable pour recevoir de l'input du clavier
     setFocusable(true);
@@ -60,6 +70,10 @@ public class SudokuPanel extends JPanel implements KeyListener {
     
   }
 
+  /**
+   * Définit le plateau de jeu Sudoku associé à ce panneau.
+   * @param board Le nouveau plateau de jeu Sudoku.
+   */
   public void setBoard(SudokuBoard board) {
     this.board = board;
   }
@@ -125,7 +139,10 @@ public class SudokuPanel extends JPanel implements KeyListener {
     }
   }
 
-  
+  /**
+   * Récupère le plateau de jeu Sudoku associé à ce panneau.
+   * @return Le plateau de jeu Sudoku associé à ce panneau.
+   */
   public SudokuBoard getBoard() {
     return board;
   }

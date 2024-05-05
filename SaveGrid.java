@@ -4,11 +4,21 @@ import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * La classe <code>SaveGrid</code> est utilisée pour sauvegarder la grille Sudoku dans un fichier.
+ * @version 1.1
+ * @author ETOILE Fabio
+ */
 public class SaveGrid {
-    // Méthode pour sauvegarder la grille dans un fichier
+
+    /**
+     * Méthode pour sauvegarder la grille dans un fichier.
+     *
+     * @param sudokuPanel Le panneau de Sudoku contenant la grille à sauvegarder.
+     */
     public static void saveGrid(SudokuPanel sudokuPanel) {
 
-        
+        // Création d'une fenêtre de dialogue pour choisir l'emplacement de sauvegarde
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Sauvegarder la grille");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Fichiers .gri", "gri"));
@@ -29,9 +39,11 @@ public class SaveGrid {
 
                 SudokuBoard board = sudokuPanel.getBoard();
                
+                // Parcours des lignes de la grille
                 for (int ligne = 0; ligne < 9; ligne++) {
                     StringBuilder sbuild = new StringBuilder();
                     
+                    // Parcours des colonnes de la grille
                     for (int colonne = 0; colonne < 9; colonne++) {
                         int number = board.getNumber(ligne, colonne);
                         // Conversion du nombre en texte pour l'écriture dans le fichier

@@ -2,6 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * La classe <code>SudokuBoard2</code> représente un tableau de Sudoku.
+ * Elle gère les opérations telles que la génération, la résolution et la vérification du tableau de Sudoku.
+ * De plus, elle permet la gestion des candidats potentiels pour chaque case.
+ * @version 1.1
+ * @author ETOILE Fabio
+ */
 public class SudokuBoard2 {
     // Variables d'instances
     private int[][] board;
@@ -10,7 +17,11 @@ public class SudokuBoard2 {
     private int[][] originalBoard;
     private List<Integer>[][] candidates;
 
-    // Constructeur
+    /**
+     * Constructeur de la classe <code>SudokuBoard2</code>.
+     *
+     * @param size La taille du tableau de Sudoku.
+     */
     public SudokuBoard2(int size) {
         this.size = size;
         board = new int[size][size];
@@ -24,26 +35,50 @@ public class SudokuBoard2 {
         }
     }
 
-    // Ajoute un candidat potentiel à une case
+    /**
+     * Ajoute un candidat potentiel à une case spécifique du tableau.
+     *
+     * @param row       La ligne de la case.
+     * @param col       La colonne de la case.
+     * @param candidate Le candidat à ajouter.
+     */
     public void addCandidate(int row, int col, int candidate) {
         candidates[row][col].add(candidate);
     }
 
-    // Supprime un candidat potentiel d'une case
+    /**
+     * Supprime un candidat potentiel d'une case spécifique du tableau.
+     *
+     * @param row       La ligne de la case.
+     * @param col       La colonne de la case.
+     * @param candidate Le candidat à supprimer.
+     */
     public void removeCandidate(int row, int col, int candidate) {
         candidates[row][col].remove((Integer) candidate);
     }
 
-    // Récupère la liste des candidats possibles pour une case
+    /**
+     * Récupère la liste des candidats potentiels pour une case spécifique du tableau.
+     *
+     * @param row La ligne de la case.
+     * @param col La colonne de la case.
+     * @return La liste des candidats potentiels pour la case spécifiée.
+     */
     public List<Integer> getCandidates(int row, int col) {
         return candidates[row][col];
     }
-
+    /**
+     * Récupère la taille du tableau de Sudoku.
+     *
+     * @return La taille du tableau de Sudoku.
+     */
     public int getSize() {
         return size;
     }
 
-    // Génère un nouveau tableau
+    /**
+     * Génère un nouveau tableau de Sudoku en vidant certaines cases de la solution générée.
+     */
     public void generateBoard() {
         clearBoard();
         solve();
@@ -70,7 +105,9 @@ public class SudokuBoard2 {
         }
     }
 
-    // Efface le tableau
+    /**
+     * Efface le tableau de Sudoku.
+     */
     private void clearBoard() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -81,7 +118,11 @@ public class SudokuBoard2 {
         }
     }
 
-    // Vérifie si le tableau est complètement rempli
+    /**
+     * Vérifie si le tableau de Sudoku est complètement rempli.
+     *
+     * @return true si le tableau est rempli, sinon false.
+     */
     public boolean isFilled() {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
@@ -93,7 +134,11 @@ public class SudokuBoard2 {
         return true;
     }
 
-    // Vérifie si le tableau est correctement rempli
+    /**
+     * Vérifie si le tableau de Sudoku est correctement rempli.
+     *
+     * @return true si le tableau est correctement rempli, sinon false.
+     */
     public boolean checkBoard() {
         // Vérifie les lignes
         for (int row = 0; row < size; row++) {
@@ -142,7 +187,11 @@ public class SudokuBoard2 {
         return true;
     }
 
-    // Résout le tableau
+    /**
+     * Résout le tableau de Sudoku.
+     *
+     * @return true si le tableau est résolu avec succès, sinon false.
+     */
     public boolean solve() {
         return solveHelper(0, 0);
     }
@@ -169,12 +218,25 @@ public class SudokuBoard2 {
         return false;
     }
 
-    // Vérifie si une case est modifiable
+    /**
+     * Vérifie si une case est modifiable.
+     *
+     * @param row La ligne de la case.
+     * @param col La colonne de la case.
+     * @return true si la case est modifiable, sinon false.
+     */
     public boolean isEditable(int row, int col) {
         return originalBoard[row][col] == 0;
     }
 
-    // Vérifie si un chiffre est valide à une position donnée
+    /**
+     * Vérifie si un chiffre est valide à une position donnée.
+     *
+     * @param row La ligne de la case.
+     * @param col La colonne de la case.
+     * @param num Le chiffre à vérifier.
+     * @return true si le chiffre est valide, sinon false.
+     */
     public boolean isValid(int row, int col, int num) {
         for (int c = 0; c < size; c++) {
             if (board[row][c] == num) {
@@ -198,19 +260,37 @@ public class SudokuBoard2 {
         return true;
     }
 
-    // Place un chiffre sur le tableau si possible
+    /**
+     * Place un chiffre sur le tableau de Sudoku si possible.
+     *
+     * @param row La ligne de la case.
+     * @param col La colonne de la case.
+     * @param num Le chiffre à placer.
+     */
     public void placeNumber(int row, int col, int num) {
         if (isValid(row, col, num)) {
             board[row][col] = num;
         }
     }
 
-    // Définit un chiffre sur le tableau même si ce n'est pas possible
+    /**
+     * Définit un chiffre sur le tableau de Sudoku même si ce n'est pas possible.
+     *
+     * @param row La ligne de la case.
+     * @param col La colonne de la case.
+     * @param num Le chiffre à définir.
+     */
     public void setNumber(int row, int col, int num) {
         board[row][col] = num;
     }
 
-    // Récupère le chiffre à une position donnée du tableau
+    /**
+     * Récupère le chiffre à une position donnée du tableau de Sudoku.
+     *
+     * @param row La ligne de la case.
+     * @param col La colonne de la case.
+     * @return Le chiffre à la position spécifiée.
+     */
     public int getNumber(int row, int col) {
         if (isValidPosition(row, col)) {
             return board[row][col];
@@ -219,7 +299,13 @@ public class SudokuBoard2 {
         }
     }
 
-    // Vérifie si une position donnée est valide dans le tableau
+    /**
+     * Vérifie si une position donnée est valide dans le tableau de Sudoku.
+     *
+     * @param row La ligne de la case.
+     * @param col La colonne de la case.
+     * @return true si la position est valide, sinon false.
+     */
     private boolean isValidPosition(int row, int col) {
         return row >= 0 && row < size && col >= 0 && col < size;
     }

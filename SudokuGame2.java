@@ -8,7 +8,12 @@ public class SudokuGame2 {
     private JFrame frame;
     private SudokuPanel2 sudokuPanel2;
     private SudokuTimer sudokuTimer;
-
+    /**
+    * La classe <code>SudokuGame2</code> représente le jeu Sudoku dans une interface graphique Swing.
+    * Elle gère l'affichage du jeu, les interactions avec l'utilisateur et les fonctionnalités du jeu.
+    * @version 1.1
+    * @author ETOILE Fabio
+    */
     public SudokuGame2() {
 
         // Constructeur
@@ -18,11 +23,15 @@ public class SudokuGame2 {
         sudokuPanel2 = new SudokuPanel2(board); // Création du panneau Sudoku avec le tableau Sudoku
         sudokuTimer = new SudokuTimer(); // Création d'un nouveau minuteur
     }
-
+     /**
+     * Démarre le jeu en démarrant le minuteur.
+     */
     public void startGame() {
         sudokuTimer.startTimer(); // Démarrage du minuteur
     }
-
+      /**
+     * Initialise le jeu en configurant la fenêtre principale, les boutons et les écouteurs d'événements.
+     */
     public void initializeGame() {
         // Configuration de la fenêtre principale
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

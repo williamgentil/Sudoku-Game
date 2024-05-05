@@ -1,11 +1,16 @@
 import javax.swing.JPanel;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * La classe <code>SudokuPanel2</code> est un panneau qui affiche le plateau du jeu Sudoku et gère les interactions avec l'utilisateur.
+ * @version 1.1
+ * @author ETOILE Fabio
+ * Il permet de sélectionner une case, d'entrer des chiffres avec le clavier et d'afficher visuellement le Sudoku.
+ */
 public class SudokuPanel2 extends JPanel implements KeyListener {
   // Variables d'instance
   private SudokuBoard2 board;
@@ -13,7 +18,11 @@ public class SudokuPanel2 extends JPanel implements KeyListener {
   private int selectedRow;
   private int selectedCol;
 
-  // Constructeur
+  /**
+   * Constructeur de la classe <code>SudokuPanel2</code>.
+   * Initialise le panneau Sudoku avec un plateau de jeu donné et ajoute des écouteurs d'événements pour les clics souris et les entrées clavier.
+   * @param board Le plateau de jeu Sudoku associé à ce panneau.
+   */
   public SudokuPanel2(SudokuBoard2 board) {
     this.board = board;
     selectedNumber = 0; 
@@ -60,6 +69,10 @@ public class SudokuPanel2 extends JPanel implements KeyListener {
     
   }
 
+  /**
+   * Définit le plateau de jeu Sudoku associé à ce panneau.
+   * @param board Le nouveau plateau de jeu Sudoku.
+   */
   public void setBoard(SudokuBoard2 board) {
     this.board = board;
   }
@@ -125,7 +138,10 @@ public class SudokuPanel2 extends JPanel implements KeyListener {
     }
   }
 
-  
+  /**
+   * Récupère le plateau de jeu Sudoku associé à ce panneau.
+   * @return Le plateau de jeu Sudoku associé à ce panneau.
+   */
   public SudokuBoard2 getBoard() {
     return board;
   }
@@ -164,12 +180,20 @@ public class SudokuPanel2 extends JPanel implements KeyListener {
     }
   }
 
-  
+  /**
+   * Récupère le numéro sélectionné.
+   * @return Le numéro sélectionné.
+   */
   public int getSelectedNumber() {
     return selectedNumber;
   }
 
-  
+  /**
+   * Définit le numéro dans une case spécifique du Sudoku.
+   * @param row La ligne de la case.
+   * @param col La colonne de la case.
+   * @param number Le numéro à définir dans la case.
+   */
   public void setNumber(int row, int col, int number) {
     if (board.isEditable(row, col)) {
       board.setNumber(row, col, number);

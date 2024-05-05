@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
@@ -5,8 +6,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.DataInputStream;
 
+/**
+ * La classe <code>LoadGrid2</code> est utilisée pour charger une deuxième grille de Sudoku à partir d'un fichier.
+ * @version 1.1
+ * @author ETOILE Fabio
+ */
 public class LoadGrid2 {
-    // Méthode principale pour charger une grille à partir d'un fichier
+
+    /**
+     * Méthode principale pour charger une grille à partir d'un fichier.
+     *
+     * @param sudokuPanel2 Le panneau de Sudoku où afficher la grille chargée.
+     */
     public static void LoadGrid2(SudokuPanel2 sudokuPanel2) {
         // Création d'une fenêtre de dialogue pour choisir le fichier
         JFrame frame = new JFrame();
@@ -21,7 +32,12 @@ public class LoadGrid2 {
         }
     }
 
-    // Méthode pour charger la grille à partir d'un fichier
+    /**
+     * Méthode pour charger la grille à partir d'un fichier.
+     *
+     * @param sudokuPanel2 Le panneau de Sudoku où afficher la grille chargée.
+     * @param file Le fichier à partir duquel charger la grille.
+     */
     private static void loadGrid2(SudokuPanel2 sudokuPanel2, File file) {
         try {
             FileInputStream fileInput = new FileInputStream(file);

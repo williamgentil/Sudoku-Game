@@ -8,7 +8,12 @@ public class SudokuGame {
     private JFrame frame;
     private SudokuPanel sudokuPanel2;
     private SudokuTimer sudokuTimer;
-
+    /**
+     * Constructeur de la classe <code>SudokuGame</code>.
+     * Initialise la fenêtre principale du jeu, le panneau Sudoku et le minuteur.
+     * @version 1.1
+     * @author ETOILE Fabio
+     */
     public SudokuGame() {
 
         // Constructeur
@@ -18,11 +23,15 @@ public class SudokuGame {
         sudokuPanel2 = new SudokuPanel(board); // Création du panneau Sudoku avec le tableau Sudoku
         sudokuTimer = new SudokuTimer(); // Création d'un nouveau minuteur
     }
-
+     /**
+     * Démarre le jeu en démarrant le minuteur.
+     */
     public void startGame() {
         sudokuTimer.startTimer(); // Démarrage du minuteur
     }
-
+    /**
+     * Initialise le jeu en configurant la fenêtre principale, les boutons et les écouteurs d'événements.
+     */
     public void initializeGame() {
         // Configuration de la fenêtre principale
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

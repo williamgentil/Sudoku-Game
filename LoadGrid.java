@@ -5,8 +5,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.DataInputStream;
 
+/**
+ * La classe <code>LoadGrid</code> est utilisée pour charger une grille de Sudoku à partir d'un fichier.
+ * 
+ * @version 1.1
+ * @author ETOILE Fabio
+ */
 public class LoadGrid {
-    // Méthode principale pour charger une grille à partir d'un fichier
+    /**
+     * Méthode principale pour charger une grille à partir d'un fichier.
+     *
+     * @param sudokuPanel Le panneau de Sudoku où afficher la grille chargée.
+     */
     public static void LoadGrid(SudokuPanel sudokuPanel) {
         // Création d'une fenêtre de dialogue pour choisir le fichier
         JFrame frame = new JFrame();
@@ -21,7 +31,12 @@ public class LoadGrid {
         }
     }
 
-    // Méthode pour charger la grille à partir d'un fichier
+    /**
+     * Méthode pour charger la grille à partir d'un fichier.
+     *
+     * @param sudokuPanel Le panneau de Sudoku où afficher la grille chargée.
+     * @param file Le fichier à partir duquel charger la grille.
+     */
     private static void loadGrid(SudokuPanel sudokuPanel, File file) {
         try {
             FileInputStream fileInput = new FileInputStream(file);
